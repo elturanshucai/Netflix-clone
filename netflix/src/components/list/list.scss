@@ -1,0 +1,33 @@
+.list {
+    width: 100%;
+    margin-top: 10px;
+    position: relative;
+
+    .splide__arrow {
+        position: absolute;
+    }
+
+    .splide__arrow:first-child {
+        left: -50px;
+    }
+
+    .splide__arrow:last-child {
+        right: -50px;
+    }
+
+    .listTitle {
+        color: white;
+        font-size: 20px;
+        font-weight: 500;
+        margin-left: 50px;
+    }
+
+    .wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: auto;
+        margin-top: 10px;
+        position: relative;
+    }
+}
