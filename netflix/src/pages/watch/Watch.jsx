@@ -8,7 +8,7 @@ export default function Watch() {
                 <ArrowBackOutlined />
                 Home
             </div>
-            <video src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+            <video src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
                 className='video'
                 autoPlay={true}
                 progress
