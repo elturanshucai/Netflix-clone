@@ -10,26 +10,20 @@
     .container {
         h1 {
             color: #00112c;
+            font-weight: 300;
+            margin-bottom: 30px;
         }
 
         .notfound {
             font-size: 30px;
-            margin-bottom: 30px;
-            font-weight: 300;
         }
 
-        .error{
-            font-weight: 700;
+        .error {
             font-size: 100px;
-            margin-bottom: 30px;
         }
 
-        p{
+        p {
             color: blue;
         }
     }
-
-
-
-
 }
