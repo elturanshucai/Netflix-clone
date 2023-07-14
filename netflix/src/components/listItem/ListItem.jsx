@@ -1,21 +1,37 @@
 import { Add, PlayArrow, ThumbDownOutlined, ThumbUpAltOutlined } from '@material-ui/icons'
 import './listItem.scss'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import axios from 'axios'
 
-export default function ListItem() {
+export default function ListItem({ filmId, index }) {
   const [isHovered, setIsHovered] = useState(false)
+  const [movie, setMovie] = useState({})
 
-  const trailer = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+  useEffect(() => {
+    const getMovie = async () => {
+      try {
+        const res = await axios.get(`${process.env.REACT_APP_BASE_URL}movies/find/${filmId}`, {
+          headers: {
+            token: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OTcwOGM3YWI3YWQ3Mjg1OTliMzQ2MyIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY4OTM0OTg5MiwiZXhwIjoxNjg5NzgxODkyfQ.q18aBZfPYSp4pOEGfVxDDV7nQH01ZCJtSvCiz8PuG-U"
+          }
+        })
+        setMovie(res.data)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    getMovie()
+  }, [filmId])
 
   return (
     <div className='listItem'
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}>
-      <img src="https://media.istockphoto.com/id/825383494/photo/business-man-pushing-large-stone-up-to-hill-business-heavy-tasks-and-problems-concept.jpg?s=612x612&w=0&k=20&c=wtqvbQ6OIHitRVDPTtoT_1HKUAOgyqa7YzzTMXqGRaQ=" alt="itemImage" />
+      <img src={movie?.img} alt="itemImage" />
 
       {isHovered && (
         <>
-          <video src={trailer} autoPlay={true} loop />
+          <video src={movie.trailer} autoPlay={true} loop />
           <div className="itemInfo">
             <div className='top'>
               <div className="icons">
@@ -25,15 +41,15 @@ export default function ListItem() {
                 <ThumbDownOutlined className='icon' />
               </div>
               <div className="itemInfoTop">
-                <span>1 hour 14 mins</span>
-                <span className='limit'>+16</span>
-                <span>2001</span>
+                <span>{movie.duration}</span>
+                <span className='limit'>+{movie.limit}</span>
+                <span>{movie.year}</span>
               </div>
             </div>
             <div className="desc">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam dolor rerum omnis dolorem totam eligendi enim libero quia exercitationem quas, veritatis neque voluptatibus doloribus quidem ea eveniet amet quisquam facilis.
+              {movie.desc}
             </div>
-            <div className="genre">Action</div>
+            <div className="genre">{movie.genre}</div>
           </div>
         </>
       )}

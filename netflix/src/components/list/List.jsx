@@ -3,16 +3,12 @@ import ListItem from "../listItem/ListItem";
 import "./list.scss";
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/splide/dist/css/splide.min.css';
-// import {
-//     ArrowBackIosOutlined,
-//     ArrowForwardIosOutlined,
-// } from "@material-ui/icons";
 
-export default function List() {
+export default function List({ list }) {
 
     return (
         <div className="list">
-            <span className="listTitle">Continue to watch</span>
+            <span className="listTitle">{list.title}</span>
             <div className="wrapper">
                 <Splide options={{
                     perMove: 1,
@@ -21,16 +17,13 @@ export default function List() {
                     pagination: false,
                     gap: 10
                 }}>
-                    <SplideSlide>
-                        <ListItem />
-                    </SplideSlide>
-                    <SplideSlide>
-                        <ListItem />
-                    </SplideSlide>
-                    <SplideSlide>
-                        <ListItem />
-                    </SplideSlide>
-
+                    {
+                        list?.content.map((id, i) => (
+                            <SplideSlide key={i}>
+                                <ListItem index={i} filmId={id} />
+                            </SplideSlide>
+                        ))
+                    }
                 </Splide>
             </div>
 
