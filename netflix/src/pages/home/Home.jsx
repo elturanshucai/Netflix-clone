@@ -35,7 +35,7 @@ export default function Home({ type }) {
       }
       {
         lists?.length === 0 && <div style={{ color: 'white' }}>
-          Uygun siyahi yoxdur
+          Siyahi yoxdur
         </div>
       }
     </div>

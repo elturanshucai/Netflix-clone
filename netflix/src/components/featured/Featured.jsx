@@ -1,7 +1,22 @@
 import { InfoOutlined, PlayArrow } from '@material-ui/icons'
 import './featured.scss'
+import { useEffect, useState } from 'react'
+import axios from 'axios'
 
 export default function Featured({ type }) {
+    const [content, setContent] = useState({})
+
+    useEffect(() => {
+        const getRandomMovie = async () => {
+            const res = await axios.get(`${process.env.REACT_APP_BASE_URL}movies/random?type=${type}`, {
+                headers: {
+                    token: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OTcwOGM3YWI3YWQ3Mjg1OTliMzQ2MyIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY4OTU4ODY3MywiZXhwIjoxNjkwMDIwNjczfQ.z2Z2nOw8vprnjkfpPq1WG5YZbPwa9FLxioecMrwm5TM"
+                }
+            })
+            setContent(res.data[0])
+        }
+        getRandomMovie()
+    }, [type])
     return (
         <div className='featured'>
             {type && (
@@ -25,11 +40,11 @@ export default function Featured({ type }) {
                     </select>
                 </div>
             )}
-            <img src="https://www.recordnet.com/gcdn/presto/2021/03/22/NRCD/9d9dd9e4-e84a-402e-ba8f-daa659e6e6c5-PhotoWord_003.JPG" alt="" />
+            <img src={content.img} alt="Content image" />
             <div className="info">
-                <img src="https://haberlobicom.teimg.com/crop/1280x720/haberlobi-com/uploads/2022/02/kurtlar-vadisi.png" alt="" />
+                <img src={content.imgTitle} alt="TitleImage" />
                 <span className='desc'>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere eligendi aliquid voluptatem aliquam error autem consequatur quam, vel doloribus facilis culpa inventore voluptate delectus explicabo illum libero, dolore, nam qui!
+                    {content.desc}
                 </span>
                 <div className="buttons">
                     <button className="play">

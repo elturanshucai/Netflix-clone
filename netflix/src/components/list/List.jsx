@@ -12,7 +12,7 @@ export default function List({ list }) {
             <div className="wrapper">
                 <Splide options={{
                     perMove: 1,
-                    perPage: 3,
+                    perPage: list?.content.length < 3 ? list?.content.length : 3,
                     width: '90%',
                     pagination: false,
                     gap: 10
