@@ -2,10 +2,13 @@ import { Add, PlayArrow, ThumbDownOutlined, ThumbUpAltOutlined } from '@material
 import './listItem.scss'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
+
 
 export default function ListItem({ filmId, index }) {
   const [isHovered, setIsHovered] = useState(false)
   const [movie, setMovie] = useState({})
+  const navigate = useNavigate()
 
   useEffect(() => {
     const getMovie = async () => {
@@ -23,8 +26,12 @@ export default function ListItem({ filmId, index }) {
     getMovie()
   }, [filmId])
 
+  const handleClick = () => {
+    navigate('/watch', { state: { movie } })
+  }
+
   return (
-    <div className='listItem'
+    <div className='listItem' onClick={handleClick}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}>
       <img src={movie?.img} alt="itemImage" />
@@ -54,5 +61,6 @@ export default function ListItem({ filmId, index }) {
         </>
       )}
     </div>
+
   )
 }

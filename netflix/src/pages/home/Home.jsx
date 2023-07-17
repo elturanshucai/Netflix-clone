@@ -12,9 +12,9 @@ export default function Home({ type }) {
   useEffect(() => {
     const getRandomLists = async () => {
       try {
-        const res = await axios.get(`${process.env.REACT_APP_BASE_URL}${type ? "lists?type=" + type : ''}${genre ? "&genre=" + genre : ''}`, {
+        const res = await axios.get(`${process.env.REACT_APP_BASE_URL}${type ? "lists?type=" + type : 'lists'}${genre ? "&genre=" + genre : ''}`, {
           headers: {
-            token: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OTcwOGM3YWI3YWQ3Mjg1OTliMzQ2MyIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY4OTM0OTg5MiwiZXhwIjoxNjg5NzgxODkyfQ.q18aBZfPYSp4pOEGfVxDDV7nQH01ZCJtSvCiz8PuG-U"
+            token: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OTcwOGM3YWI3YWQ3Mjg1OTliMzQ2MyIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY4OTU4ODY3MywiZXhwIjoxNjkwMDIwNjczfQ.z2Z2nOw8vprnjkfpPq1WG5YZbPwa9FLxioecMrwm5TM"
           }
         })
         setLists(res.data)
